@@ -1,23 +1,22 @@
-#include <stdio.h>  // Do wypisywania na ekran (printf)
-#include <stdlib.h> // Do obsługi błędów (exit)
+#include <stdio.h>
+#include <stdlib.h>
+#include "io.h"
+#include "maths.h"
 
 int main(int argc, char *argv[]) {
-    // argc - liczba argumentów (zawsze co najmniej 1, bo argv[0] to nazwa programu)
-    // argv - tablica stringów z argumentami
-
     if (argc == 1) {
-        // Brak argumentów - tryb interaktywny (na razie prosty komunikat)
         printf("Witaj! To narzędzie quad. Wpisz współczynniki: a b c\n");
-        // Tu później dodamy czytanie z stdin
     } else if (argc == 4) {
-        // Argumenty: quad a b c
-        printf("Otrzymałem argumenty: a=%s, b=%s, c=%s\n", argv[1], argv[2], argv[3]);
-        // Tu później parsowanie na double i obliczenia
+        // Parsujemy argumenty na double (na razie proste, bez błędów)
+        double a = atof(argv[1]);  // atof konwertuje string na double
+        double b = atof(argv[2]);
+        double c = atof(argv[3]);
+        
+        double d = delta(a, b, c);  // Używamy funkcji z maths
+        printf("Delta: %f\n", d);
     } else {
-        // Błąd - zła liczba argumentów
-        printf("Użycie: quad a b c  (lub quad -f plik.txt)\n");
-        return 1;  // Zwróć 1, by wskazać błąd
+        print_usage();  // Używamy funkcji z io
+        return 1;
     }
-
-    return 0;  // Sukces
+    return 0;
 }
