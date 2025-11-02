@@ -1,5 +1,10 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -O2
+LDFLAGS = -lm          # <--- DODAJEMY TO!
+
+# Cele
 quad: main.o io.o maths.o
-	$(CC) $(CFLAGS) main.o io.o maths.o -o quad
+	$(CC) $(CFLAGS) main.o io.o maths.o -o quad $(LDFLAGS)
 
 main.o: main.c io.h maths.h
 	$(CC) $(CFLAGS) -c main.c
@@ -12,3 +17,5 @@ maths.o: maths.c maths.h
 
 clean:
 	rm -f *.o quad
+
+.PHONY: clean
